@@ -4,11 +4,12 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator anim;
-
+    SpriteRenderer MarioSprite;
     public float speed;
     public int jumpForce;
     public bool isGrounded;
@@ -18,12 +19,14 @@ public class PlayerMovement : MonoBehaviour
     public bool isFire;
     private Vector3 initialScale;
     public bool isCape;
+     
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        MarioSprite = GetComponent <SpriteRenderer>();
 
         initialScale = transform.localScale;
 
@@ -54,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
         
 
+
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = Vector2.zero;
@@ -67,14 +71,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isFire = false;
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.localScale = new Vector3(initialScale.x, initialScale.y, initialScale.z);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.localScale = new Vector3(-initialScale.x, initialScale.y, initialScale.z);
-        }
+        
         if (Input.GetButtonDown("Jump") && Input.GetKeyDown(KeyCode.W))
         {
             isCape = true;
@@ -86,12 +83,14 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-
-
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
         anim.SetFloat("speed", Mathf.Abs(horizontalInput));
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isFire", isFire);
         anim.SetBool("isCape", isCape);
+
+
+        if (MarioSprite.flipX && horizontalInput > 0 || !MarioSprite.flipX && horizontalInput < 0)
+            MarioSprite.flipX = !MarioSprite.flipX;
     }
 }

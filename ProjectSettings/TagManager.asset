@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Powerup
+  - Mario
+  - mushroom
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -43,4 +48,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3461606785
+    locked: 0
+  - name: Powerup
+    uniqueID: 868328341
     locked: 0
