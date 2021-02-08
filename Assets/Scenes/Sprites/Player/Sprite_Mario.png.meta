@@ -160,7 +160,7 @@ TextureImporter:
     second: Sprite_Mario_51
   - first:
       213: 2024578721505582386
-    second: Sprite_Mario_52
+    second: Sprite_Mario_zombie
   - first:
       213: -991126873710766664
     second: Sprite_Mario_Cape1
@@ -1366,7 +1366,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sprite_Mario_52
+      name: Sprite_Mario_zombie
       rect:
         serializedVersion: 2
         x: 164
