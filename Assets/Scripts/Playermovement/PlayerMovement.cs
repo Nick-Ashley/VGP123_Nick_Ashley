@@ -19,8 +19,39 @@ public class PlayerMovement : MonoBehaviour
     public bool isFire;
     private Vector3 initialScale;
     public bool isCape;
-     
+    
 
+    int _score = 0;
+
+    public int score
+    {
+        get { return _score; }
+        set
+        {
+            _score = value;
+            Debug.Log("Current Score Is " + _score);
+        }
+    }
+    public int maxlives = 3;
+    int _lives = 3;
+    public int lives
+    {
+        get { return _lives; }
+        set
+        {
+            _lives = value;
+            if (_lives > maxlives)
+            {
+                _lives = maxlives;
+            }
+            else if (_lives < 0)
+            {
+                //run game over code here
+            }
+            Debug.Log("Current Lives Is" + _lives);
+        }
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -92,5 +123,61 @@ public class PlayerMovement : MonoBehaviour
 
         if (MarioSprite.flipX && horizontalInput > 0 || !MarioSprite.flipX && horizontalInput < 0)
             MarioSprite.flipX = !MarioSprite.flipX;
+
+     
+    }
+    public void StartJumpForceChange()
+    {
+        StartCoroutine(JumpForceChange());
+
+    }
+    IEnumerator JumpForceChange()
+    {
+        jumpForce = 500;
+
+        yield return new WaitForSeconds ( 8.0f);
+
+        jumpForce = 300;
+
+    }
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Pickup")
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Pickups curPickup = collision.GetComponent<Pickups>();
+                switch (curPickup.currentCollectible)
+                {
+                    case Pickups.CollectibleType.KEY:
+                        //Add ComponentMenu to Inventory r Other Mechanic
+                        Destroy(collision.gameObject);
+                        break;
+                }
+            }
+        }  
+        
+    }
+
+    
+
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag =="Box Powerup")
+        {
+            collision.gameObject.GetComponent<BoxSpawn>().StartBoxSpawn();
+            Debug.Log("Spawn Stuff");
+            
+
+            if (true)
+            {
+                
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }
+

@@ -9,6 +9,9 @@ TagManager:
   - Mario
   - mushroom
   - PowerUp
+  - Coin
+  - Pickup
+  - Box Powerup
   layers:
   - Default
   - TransparentFX

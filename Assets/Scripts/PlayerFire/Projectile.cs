@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
 
-        if(col.gameObject.tag == "Ground")
+        if(col.gameObject.tag != "Mario")
         {
             Debug.Log("destroy");
             Destroy(gameObject);
